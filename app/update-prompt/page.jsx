@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Form from '@components/Form';
 
@@ -18,12 +18,16 @@ const SearchParamsComponent = () => {
   const searchParams = useSearchParams();
   const promptId = searchParams.get('id');
 
-  // Load prompt details only once or when promptId changes
-  React.useEffect(() => {
-    if (!promptId) return;
+  // Ensure that the useEffect does not trigger continuous re-fetches
+  useEffect(() => {
+    if (!promptId) return; // Exit if no ID
 
     const getPromptDetails = async () => {
       const response = await fetch(`/api/prompt/${promptId}`);
+      if (!response.ok) {
+        console.error("Failed to fetch prompt details:", response.statusText);
+        return;
+      }
       const data = await response.json();
       setPost({
         prompt: data.prompt,
@@ -32,7 +36,7 @@ const SearchParamsComponent = () => {
     };
 
     getPromptDetails();
-  }, [promptId]); // Ensures it runs only if promptId changes
+  }, [promptId]); // Dependency array includes only promptId
 
   const updatePrompt = async (e) => {
     e.preventDefault();
@@ -47,17 +51,19 @@ const SearchParamsComponent = () => {
     try {
       const response = await fetch(`/api/prompt/${promptId}`, {
         method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        })
       });
 
       if (response.ok) {
         router.push('/');
+      } else {
+        console.error("Failed to update prompt:", response.statusText);
       }
     } catch (error) {
       console.error("Failed to update prompt:", error);
@@ -78,3 +84,4 @@ const SearchParamsComponent = () => {
 }
 
 export default EditPrompt;
+
