@@ -28,6 +28,9 @@ const Feed = () => {
 
   const fetchPosts = async () => {
     const response = await fetch('/api/prompt2');
+    if (!response.ok) {
+      throw new Error('Failed to fetch: ' + response.statusText);
+    }
     const data = await response.json();
     setPosts(data);
   };
