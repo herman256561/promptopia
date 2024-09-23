@@ -27,7 +27,7 @@ const Feed = () => {
   }
   const idd = '66c604972020b851d45fcb71';
   const fetchPosts = async () => {
-    const response = await fetch(`/api/users/${idd}/posts`);
+    const response = await fetch(`/api/prompt`);
     if (!response.ok) {
       throw new Error('Failed to fetch: ' + response.statusText);
     }
