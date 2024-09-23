@@ -1,7 +1,6 @@
 "use client";
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import PromptCard from './PromptCard';
 
 const PromptCardList = ({data, handleTagClick}) => {
@@ -22,26 +21,36 @@ const PromptCardList = ({data, handleTagClick}) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
-  const router = useRouter;
+
   const handleSearchChange = (e) =>{
 
   }
 
-  useEffect(()=>{
+  const fetchPosts = async () => {
+    const response = await fetch('/api/prompt');
+    const data = await response.json();
+    setPosts(data);
+  };
+
+  useEffect(() => {
+    fetchPosts(); // Initial fetch
+  }, []);
+
+  // useEffect(()=>{
     
-    const fetchPosts = async() => {
-      const response = await fetch('/api/prompt');
-      const data = await response.json();
+  //   const fetchPosts = async() => {
+  //     const response = await fetch('/api/prompt');
+  //     const data = await response.json();
       
-      setPosts(data);
-    }
+  //     setPosts(data);
+  //   }
     
-    fetchPosts();
-  }, [router.asPath]);
+  //   fetchPosts();
+  // }, []);
 
   return (
     <section className='feed'>
-
+      <button onClick={fetchPosts} className='text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700'>Refresh Posts</button>
       <PromptCardList 
         data={posts}
         handleTagClick = {()=>{}}
