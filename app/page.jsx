@@ -1,5 +1,7 @@
 import Feed from "@components/Feed";
 
+// A uniue route under the current directory. (This will be the home page because it's under the root app directory)
+// A <Feed /> component will be placed in home page.
 const Home = () => {
   return (
     <section className="w-full flex-center flex-col">

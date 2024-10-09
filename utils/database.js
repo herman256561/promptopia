@@ -10,6 +10,7 @@ export const connectToDB = async ()=>{
         return;
     }
 
+    // Connect to a cluster called "share_prompt" using MONGODB_URI in .env
     try {
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName: "share_prompt",

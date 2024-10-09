@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import {signIn, signOut, useSession, getProviders} from "next-auth/react";
 
+
 const Nav = () => {
   const {data:session} = useSession();
-
+  
+  // providers is set to be the response of getProviders()
+  // If multiple providers are returned as a response, these providers will be mapped when the signIn button is clicked.
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 

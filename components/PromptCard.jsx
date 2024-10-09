@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 
+// A PromptCard component contains a user image, user name, user email, prompt, and tags. 
+// If session.user.id equals post.creator._id then the edit and delete buttons will be displayed.
 const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}) => {
   const {data:session} = useSession();
   const [copied, setCopied] = useState("");

@@ -11,6 +11,7 @@ const handler = NextAuth({
         })
     ],
     callbacks:{
+        // The session callback is called whenever a session is checked.
         async session({session}){
             const sessionUser = await User.findOne({
                 email: session.user.email
@@ -20,11 +21,12 @@ const handler = NextAuth({
     
             return session;
         },
+        // Use the signIn() callback to control if a user is allowed to sign in.
         async signIn({profile}){
             try{
                 await connectToDB();
     
-                // check if the user already exists
+                // check if the user already exists in MongoDB
                 const userExists = await User.findOne({
                     email: profile.email
                 });

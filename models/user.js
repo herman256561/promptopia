@@ -1,5 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
+// Define a users schema. The schema in mongodb called "users".
 const UserSchema = new Schema({
     email:{
         type: String,

@@ -1,7 +1,9 @@
 import React from 'react';
 import PromptCard from './PromptCard';
 
-
+// A Profile component contains PromptCards that shows the posts created by certain creator.
+// The parameter "data" is set in /app/profile/page.jsx file. 
+// The parameter "data" is obtained by fetching the endpoint /app//api/users/${session?.user.id}/posts/route.js
 const Profile = ({name, desc, data, handleEdit, handleDelete}) => {
   
   return (
