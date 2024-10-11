@@ -16,6 +16,7 @@ const CreatePrompt = () => {
         tag: '',
     });
 
+    // createPrompt will be called when the Form is submitted
     const createPrompt = async(e) => {
         e.preventDefault();
         setSubmitting(true);

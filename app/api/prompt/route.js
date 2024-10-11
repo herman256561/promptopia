@@ -1,6 +1,7 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
 
+// This endpoint cannot be called properly. Issue unknown.
 export const GET = async(request) => {
     try {
         await connectToDB();

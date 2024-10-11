@@ -1,6 +1,8 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
 
+// This endpoint will be fetched by profile page.
+// To get all the posts created by a specific user
 export const GET = async(request, {params}) => {
     try {
         await connectToDB();

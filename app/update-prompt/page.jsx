@@ -15,6 +15,8 @@ const SearchParamsComponent = () => {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: '', tag: '' });
+  
+  // The parameter 'id' is passed from the handleEdit function in /app/profile/page.jsx
   const searchParams = useSearchParams();
   const promptId = searchParams.get('id');
 
@@ -22,6 +24,7 @@ const SearchParamsComponent = () => {
   useEffect(() => {
     if (!promptId) return; // Exit if no ID
 
+    // get the details of a specific prompt
     const getPromptDetails = async () => {
       const response = await fetch(`/api/prompt/${promptId}`);
       if (!response.ok) {
@@ -38,6 +41,8 @@ const SearchParamsComponent = () => {
     getPromptDetails();
   }, [promptId]); // Dependency array includes only promptId
 
+
+  // update a specific prompt
   const updatePrompt = async (e) => {
     e.preventDefault();
     setSubmitting(true);

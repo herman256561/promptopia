@@ -1,6 +1,8 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
 
+// This endpoint will be used to get, update, and delete a specific prompt.
+
 export const GET = async(request, {params}) => {
     try {
         await connectToDB();

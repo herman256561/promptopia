@@ -10,7 +10,7 @@ const MyProfile = () => {
     const {data:session} = useSession();
 
     const [posts, setPosts] = useState([]);
-
+    // To get the prompts that is created by current signed in user
     useEffect(()=>{
         const fetchPosts = async() => {
           const response = await fetch(`/api/users/${session?.user.id}/posts`);
@@ -20,11 +20,12 @@ const MyProfile = () => {
         
         if(session?.user.id) fetchPosts();
       }, []);
-
+  
+  // handle the update of the prompt
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   }
-
+  // handle the deletion of the prompt
   const handleDelete = async(post) => {
     const hasConfirmed = confirm("Are you sure to delete this prompt?");
 
@@ -43,7 +44,7 @@ const MyProfile = () => {
 
   }
 
-
+  // handleEdit and handleDelete will be passed to Profile component and then passed to PromptCard component.
   return (
     <Profile 
         name = "My"

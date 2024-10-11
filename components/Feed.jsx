@@ -18,13 +18,17 @@ const PromptCardList = ({data, handleTagClick}) => {
   )
 }
 
+// This Feed component will be displayed on the home page.
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
 
+  // handle search function is not yet finished.
   const handleSearchChange = (e) =>{
 
   }
+
+  // The API in /api/prompt/route.js can't be properly fetched if there's no parameter. So I set up an parameter called idd.
   const idd = "{}";
   const fetchPosts = async () => {
     const response = await fetch(`/api/prompt2/${idd}/posts`);
@@ -38,18 +42,6 @@ const Feed = () => {
   useEffect(() => {
     fetchPosts(); // Initial fetch
   }, []);
-
-  // useEffect(()=>{
-    
-  //   const fetchPosts = async() => {
-  //     const response = await fetch('/api/prompt');
-  //     const data = await response.json();
-      
-  //     setPosts(data);
-  //   }
-    
-  //   fetchPosts();
-  // }, []);
 
   return (
     <section className='feed'>

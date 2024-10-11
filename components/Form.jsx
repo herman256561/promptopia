@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
+// This Form component will be imported in create-prompt/page.jsx and update-prompt/page.jsx. 
 const Form = ({type, post, setPost, submitting, handleSubmit}) => {
   return (
     <section className='w-full max-w-full flex-start flex-col'>
@@ -12,7 +13,7 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
       <form onSubmit={handleSubmit} className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'>
         <label>
           <span className='font-satoshi font-semibold text-base text-grey-700'>Your AI Prompt</span>
-        
+        {/* ...post will  spread the properties of post. So that the property "prompt" can be directly manipulated */}
         <textarea 
           value={post.prompt} 
           onChange={(e)=>setPost({...post, prompt: e.target.value})}
